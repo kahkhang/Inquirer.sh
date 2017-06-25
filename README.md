@@ -24,7 +24,7 @@ source checkbox_input.sh
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 
-checkbox_input selected_indices "Which hawker centres do you prefer?" "${hawker_centres[@]}"
+checkbox_input selected_indices "Which hawker centres do you prefer?" hawker_centres
 echo "Selected indices $(join "${selected_indices[@]}")"
 echo "Selected Hawker Centers:"
 for i in $(seq 1 ${#selected_hawkers[@]}); do
