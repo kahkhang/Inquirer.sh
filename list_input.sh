@@ -3,6 +3,7 @@ set -e
 source common.sh
 
 on_list_input_up() {
+  remove_list_instructions
   tput cub "$(tput cols)"
   tput el
 
@@ -25,6 +26,7 @@ on_list_input_up() {
 }
 
 on_list_input_down() {
+  remove_list_instructions
   tput cub "$(tput cols)"
   tput el
 
@@ -43,7 +45,7 @@ on_list_input_down() {
   printf "${cyan}${arrow} %s ${normal}" "${list[$selected_index]}"
 }
 
-on_list_input_enter() {
+on_list_input_enter_space() {
   local OLD_IFS
   OLD_IFS=$IFS
   IFS=$'\n'
@@ -52,6 +54,7 @@ on_list_input_enter() {
 
 
   tput cuf $((${#prompt}+3))
+  tput el
   printf "${cyan}${list[$selected_index]}${normal}"
 
   tput cud1
@@ -62,18 +65,30 @@ on_list_input_enter() {
   IFS=$OLD_IFS
 }
 
+remove_list_instructions() {
+  if [ $first_keystroke = true ]; then
+    tput cuu $((${selected_index}+1))
+    tput cub "$(tput cols)"
+    tput cuf $((${#prompt}+3))
+    tput el
+    tput cud $((${selected_index}+1))
+    first_keystroke=false
+  fi
+}
+
 list_input() {
   prompt=$1
   shift
   list=("${@}")
   selected_index=0
+  first_keystroke=true
 
   trap control_c SIGINT EXIT
 
   stty -echo
   tput civis
 
-  echo "${normal}${green}?${normal} ${bold}${prompt}${normal}"
+  echo "${normal}${green}?${normal} ${bold}${prompt}${normal} ${dim}(Use arrow keys)${normal}"
 
   for i in $(gen_index ${#list[@]}); do
     tput cub "$(tput cols)"
@@ -89,6 +104,6 @@ list_input() {
     tput cuu1
   done
 
-  on_keypress on_list_input_up on_list_input_down on_default on_list_input_enter
+  on_keypress on_list_input_up on_list_input_down on_list_input_enter_space on_list_input_enter_space
   unset list
 }

@@ -3,6 +3,7 @@ set -e
 source common.sh
 
 on_checkbox_input_up() {
+  remove_checkbox_instructions
   tput cub "$(tput cols)"
   tput el
 
@@ -33,6 +34,7 @@ on_checkbox_input_up() {
 }
 
 on_checkbox_input_down() {
+  remove_checkbox_instructions
   tput cub "$(tput cols)"
   tput el
 
@@ -77,6 +79,7 @@ on_checkbox_input_enter() {
   done
 
   tput cuf $((${#prompt}+3))
+  tput el
   printf "${cyan}$(join "${selected_options[@]}")${normal}"
 
   tput cud1
@@ -88,6 +91,7 @@ on_checkbox_input_enter() {
 }
 
 on_checkbox_input_space() {
+  remove_checkbox_instructions
   tput cub "$(tput cols)"
   tput el
   if [ "${selected[$current_index]}" = true ]; then
@@ -103,18 +107,31 @@ on_checkbox_input_space() {
   fi
 }
 
+remove_checkbox_instructions() {
+  if [ $first_keystroke = true ]; then
+    tput cuu $((${current_index}+1))
+    tput cub "$(tput cols)"
+    tput cuf $((${#prompt}+3))
+    tput el
+    tput cud $((${current_index}+1))
+    first_keystroke=false
+  fi
+}
+
 checkbox_input() {
   prompt=$1
   shift
   list=("${@}")
   current_index=0
+  first_keystroke=true
 
   trap control_c SIGINT EXIT
 
   stty -echo
   tput civis
 
-  echo "${normal}${green}?${normal} ${bold}${prompt}${normal}"
+  echo "${normal}${green}?${normal} ${bold}${prompt}${normal} ${dim}(Press <space> to select, <enter> to finalize)${normal}"
+
   for i in $(gen_index ${#list[@]}); do
     selected[$i]=false
   done
