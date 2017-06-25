@@ -77,8 +77,7 @@ remove_list_instructions() {
 
 list_input() {
   prompt=$1
-  shift
-  list=("${@}")
+  eval list=( '"${'${2}'[@]}"' )
   selected_index=0
   _first_keystroke=true
 

@@ -9,7 +9,7 @@ A collection of common interactive command line user interfaces, written in bash
 source list_input.sh
 
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
-list_input "What would you like to drink today?" "${drinks[@]}"
+list_input "What would you like to drink today?" drinks
 
 print "Selected: ${drinks[$selected_index]}"
 ```
@@ -21,7 +21,7 @@ print "Selected: ${drinks[$selected_index]}"
 source checkbox_input.sh
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
-checkbox_input "Which hawker centres do you prefer?" "${hawker_centres[@]}"
+checkbox_input "Which hawker centres do you prefer?" hawker_centres
 selected_hawkers=( "${selected_options[@]}" )
 print "Selected indices $(join "${selected_indices[@]}")"
 print "Hawker Centres: $(join "${selected_hawkers[@]}")"

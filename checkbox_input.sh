@@ -120,8 +120,7 @@ remove_checkbox_instructions() {
 
 checkbox_input() {
   prompt=$1
-  shift
-  list=("${@}")
+  eval list=( '"${'${2}'[@]}"' )
   _current_index=0
   _first_keystroke=true
 
