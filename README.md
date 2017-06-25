@@ -36,3 +36,7 @@ source text_input.sh
 text_input "What's your first name" name
 echo "$name"
 ```
+
+### [License](https://github.com/tanhauhau/Inquirer.sh/blob/master/LICENSE)
+
+### [Contributors](https://github.com/tanhauhau/Inquirer.sh/blob/master/CONTRIBUTORS.md)
