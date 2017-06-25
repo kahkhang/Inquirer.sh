@@ -44,6 +44,8 @@ on_keypress() {
   local on_enter=${4:-on_default}
   local on_left=${5:-on_default}
   local on_right=${6:-on_default}
+  local on_ascii=${7:-on_default}
+  local on_backspace=${8:-on_default}
   _break_keypress=false
   while IFS="" read -rsn1 key; do
       case "$key" in
@@ -59,8 +61,10 @@ on_keypress() {
               esac
           fi
           ;;
-      ' ') eval $on_space;;
-      '') eval $on_enter;;
+      ' ') eval $on_space ' ';;
+      [a-z0-9A-Z\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~]) eval $on_ascii $key;;
+      $'\x7f') eval $on_backspace $key;;
+      '') eval $on_enter $key;;
       esac
       if [ $_break_keypress = true ]; then
         break
