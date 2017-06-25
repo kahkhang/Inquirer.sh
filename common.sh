@@ -62,7 +62,7 @@ on_keypress() {
           fi
           ;;
       ' ') eval $on_space ' ';;
-      [a-z0-9A-Z\!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~]) eval $on_ascii $key;;
+      [a-z0-9A-Z\!\#\$\&\+\,\-\.\/\;\=\?\@\[\]\^\_\{\}\~]) eval $on_ascii $key;;
       $'\x7f') eval $on_backspace $key;;
       '') eval $on_enter $key;;
       esac

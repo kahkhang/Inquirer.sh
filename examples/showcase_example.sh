@@ -6,8 +6,6 @@ source text_input.sh
 
 text_input "What's your first name" name
 
-echo "$name"
-
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 checkbox_input "Which hawker centres do you prefer?" hawker_centres
 selected_hawkers=( "${selected_options[@]}" )
@@ -24,6 +22,7 @@ selected_food="${food[$selected_index]}"
 
 print "              Your selections                   "
 print "------------------------------------------------"
+print "Name: $name"
 print "Drink: $selected_drink"
 print "Food: $selected_food"
 print "Hawker Centres: $(join "${selected_hawkers[@]}")"
