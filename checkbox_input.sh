@@ -62,9 +62,9 @@ on_checkbox_input_down() {
 
 on_checkbox_input_enter() {
   local OLD_IFS
+  local selected_indices=()
+  
   OLD_IFS=$IFS
-  selected_indices=()
-  selected_options=()
   IFS=$'\n'
   tput cuu $((${current_index}+1))
   tput cub "$(tput cols)"
@@ -82,6 +82,8 @@ on_checkbox_input_enter() {
   tput cud1
   tput cub "$(tput cols)"
   tput el
+
+  eval "$variable=( ${selected_indices[@]} )"
 
   inquirer_break_keypress=true
   IFS=$OLD_IFS
@@ -104,11 +106,11 @@ on_checkbox_input_space() {
 }
 
 checkbox_input() {
-  prompt=$1
+  local variable=$1
   shift
-  list=("${@}")
-  current_index=0
-
+  local prompt=$1
+  shift
+  local list=("${@}") current_index=0
   trap control_c SIGINT EXIT
 
   stty -echo
@@ -141,5 +143,4 @@ checkbox_input() {
   done
 
   on_keypress on_checkbox_input_up on_checkbox_input_down on_checkbox_input_space on_checkbox_input_enter
-  unset list
 }
