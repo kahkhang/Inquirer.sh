@@ -44,7 +44,7 @@ on_keypress() {
   local on_enter=${4:-on_default}
   local on_left=${5:-on_default}
   local on_right=${6:-on_default}
-  inquirer_break_keypress=false
+  _break_keypress=false
   while IFS="" read -rsn1 key; do
       case "$key" in
       $'\x1b')
@@ -62,7 +62,7 @@ on_keypress() {
       ' ') eval $on_space;;
       '') eval $on_enter;;
       esac
-      if [ $inquirer_break_keypress = true ]; then
+      if [ $_break_keypress = true ]; then
         break
       fi
   done

@@ -60,7 +60,7 @@ on_list_input_enter_space() {
   tput cub "$(tput cols)"
   tput el
 
-  inquirer_break_keypress=true
+  _break_keypress=true
   IFS=$OLD_IFS
 }
 

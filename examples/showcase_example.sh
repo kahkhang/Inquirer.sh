@@ -2,6 +2,11 @@
 set -e
 source list_input.sh
 source checkbox_input.sh
+source text_input.sh
+
+text_input "What's your first name" name
+
+echo "$name"
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 checkbox_input "Which hawker centres do you prefer?" hawker_centres

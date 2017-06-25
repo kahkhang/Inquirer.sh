@@ -26,3 +26,13 @@ selected_hawkers=( "${selected_options[@]}" )
 print "Selected indices $(join "${selected_indices[@]}")"
 print "Hawker Centres: $(join "${selected_hawkers[@]}")"
 ```
+
+### Text Input
+![Text Input Example](screenshots/text_input.png "Text Input Example")
+
+```sh
+source text_input.sh
+
+text_input "What's your first name" name
+echo "$name"
+```
