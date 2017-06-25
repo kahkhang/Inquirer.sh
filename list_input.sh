@@ -62,19 +62,19 @@ on_down() {
 }
 
 on_left() {
-  printf "Left\n"
+  true;
 }
 
 on_right() {
-  printf "Right\n"
+  true;
 }
 
 on_space() {
-  echo "space"
+  true;
 }
 
 on_enter() {
-  echo "enter"
+  true;
 }
 
 on_keypress() {
