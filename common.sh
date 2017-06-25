@@ -1,7 +1,7 @@
 #!/bin/bash
-arrow=$(echo -e '\xe2\x9d\xaf')
-checked=$(echo -e '\xe2\x97\x89')
-unchecked=$(echo -e '\xe2\x97\xaf')
+arrow="$(echo -e '\xe2\x9d\xaf')"
+checked="$(echo -e '\xe2\x97\x89')"
+unchecked="$(echo -e '\xe2\x97\xaf')"
 
 black="$(tput setaf 0)"
 red="$(tput setaf 1)"
@@ -11,8 +11,14 @@ blue="$(tput setaf 4)"
 magenta="$(tput setaf 5)"
 cyan="$(tput setaf 6)"
 white="$(tput setaf 7)"
-bold=$(tput bold)
+bold="$(tput bold)"
 normal="$(tput sgr0)"
+dim=$'\e[2m'
+
+print() {
+  echo "$1"
+  tput el
+}
 
 join() {
   echo -n "$1";
@@ -38,7 +44,7 @@ on_keypress() {
   local on_enter=${4:-on_default}
   local on_left=${5:-on_default}
   local on_right=${6:-on_default}
-  inquirer_break_keypress=false
+  _break_keypress=false
   while IFS="" read -rsn1 key; do
       case "$key" in
       $'\x1b')
@@ -56,7 +62,7 @@ on_keypress() {
       ' ') eval $on_space;;
       '') eval $on_enter;;
       esac
-      if [ $inquirer_break_keypress = true ]; then
+      if [ $_break_keypress = true ]; then
         break
       fi
   done
