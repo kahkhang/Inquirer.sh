@@ -18,5 +18,5 @@ text_input() {
   tput cud1
   tput cub "$(tput cols)"
   tput el
-  eval $2=\'"${input}"\'
+  eval $var_name=\'"${input}"\'
 }
