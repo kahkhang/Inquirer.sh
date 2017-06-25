@@ -1,7 +1,7 @@
 #!/bin/bash
-arrow=$(echo -e '\xe2\x9d\xaf')
-checked=$(echo -e '\xe2\x97\x89')
-unchecked=$(echo -e '\xe2\x97\xaf')
+arrow="$(echo -e '\xe2\x9d\xaf')"
+checked="$(echo -e '\xe2\x97\x89')"
+unchecked="$(echo -e '\xe2\x97\xaf')"
 
 black="$(tput setaf 0)"
 red="$(tput setaf 1)"
@@ -14,6 +14,11 @@ white="$(tput setaf 7)"
 bold="$(tput bold)"
 normal="$(tput sgr0)"
 dim=$'\e[2m'
+
+print() {
+  echo "$1"
+  tput el
+}
 
 join() {
   echo -n "$1";

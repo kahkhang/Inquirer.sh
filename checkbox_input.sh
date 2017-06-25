@@ -5,60 +5,60 @@ source common.sh
 on_checkbox_input_up() {
   remove_checkbox_instructions
   tput cub "$(tput cols)"
+
+  if [ "${selected[$_current_index]}" = true ]; then
+    printf " ${green}${checked}${normal} ${list[$_current_index]} ${normal}"
+  else
+    printf " ${unchecked} ${list[$_current_index]} ${normal}"
+  fi
   tput el
 
-  if [ "${selected[$current_index]}" = true ]; then
-    printf " ${green}${checked}${normal} ${list[$current_index]} ${normal}"
-  else
-    printf " ${unchecked} ${list[$current_index]} ${normal}"
-  fi
-
-
-  if [ $current_index = 0 ]; then
-    current_index=$((${#list[@]}-1))
+  if [ $_current_index = 0 ]; then
+    _current_index=$((${#list[@]}-1))
     tput cud $((${#list[@]}-1))
     tput cub "$(tput cols)"
   else
-    current_index=$((current_index-1))
+    _current_index=$((_current_index-1))
 
     tput cuu1
     tput cub "$(tput cols)"
     tput el
   fi
 
-  if [ "${selected[$current_index]}" = true ]; then
-    printf "${cyan}${arrow}${green}${checked}${normal} ${list[$current_index]} ${normal}"
+  if [ "${selected[$_current_index]}" = true ]; then
+    printf "${cyan}${arrow}${green}${checked}${normal} ${list[$_current_index]} ${normal}"
   else
-    printf "${cyan}${arrow}${normal}${unchecked} ${list[$current_index]} ${normal}"
+    printf "${cyan}${arrow}${normal}${unchecked} ${list[$_current_index]} ${normal}"
   fi
 }
 
 on_checkbox_input_down() {
   remove_checkbox_instructions
   tput cub "$(tput cols)"
-  tput el
 
-  if [ "${selected[$current_index]}" = true ]; then
-    printf " ${green}${checked}${normal} ${list[$current_index]} ${normal}"
+  if [ "${selected[$_current_index]}" = true ]; then
+    printf " ${green}${checked}${normal} ${list[$_current_index]} ${normal}"
   else
-    printf " ${unchecked} ${list[$current_index]} ${normal}"
+    printf " ${unchecked} ${list[$_current_index]} ${normal}"
   fi
 
-  if [ $current_index = $((${#list[@]}-1)) ]; then
-    current_index=0
+  tput el
+
+  if [ $_current_index = $((${#list[@]}-1)) ]; then
+    _current_index=0
     tput cuu $((${#list[@]}-1))
     tput cub "$(tput cols)"
   else
-    current_index=$((current_index+1))
+    _current_index=$((_current_index+1))
     tput cud1
     tput cub "$(tput cols)"
     tput el
   fi
 
-  if [ "${selected[$current_index]}" = true ]; then
-    printf "${cyan}${arrow}${green}${checked}${normal} ${list[$current_index]} ${normal}"
+  if [ "${selected[$_current_index]}" = true ]; then
+    printf "${cyan}${arrow}${green}${checked}${normal} ${list[$_current_index]} ${normal}"
   else
-    printf "${cyan}${arrow}${normal}${unchecked} ${list[$current_index]} ${normal}"
+    printf "${cyan}${arrow}${normal}${unchecked} ${list[$_current_index]} ${normal}"
   fi
 }
 
@@ -68,7 +68,7 @@ on_checkbox_input_enter() {
   selected_indices=()
   selected_options=()
   IFS=$'\n'
-  tput cuu $((${current_index}+1))
+  tput cuu $((${_current_index}+1))
   tput cub "$(tput cols)"
 
   for i in $(gen_index ${#list[@]}); do
@@ -79,8 +79,8 @@ on_checkbox_input_enter() {
   done
 
   tput cuf $((${#prompt}+3))
-  tput el
   printf "${cyan}$(join "${selected_options[@]}")${normal}"
+  tput el
 
   tput cud1
   tput cub "$(tput cols)"
@@ -94,27 +94,27 @@ on_checkbox_input_space() {
   remove_checkbox_instructions
   tput cub "$(tput cols)"
   tput el
-  if [ "${selected[$current_index]}" = true ]; then
-    selected[$current_index]=false
+  if [ "${selected[$_current_index]}" = true ]; then
+    selected[$_current_index]=false
   else
-    selected[$current_index]=true
+    selected[$_current_index]=true
   fi
 
-  if [ "${selected[$current_index]}" = true ]; then
-    printf "${cyan}${arrow}${green}${checked}${normal} ${list[$current_index]} ${normal}"
+  if [ "${selected[$_current_index]}" = true ]; then
+    printf "${cyan}${arrow}${green}${checked}${normal} ${list[$_current_index]} ${normal}"
   else
-    printf "${cyan}${arrow}${normal}${unchecked} ${list[$current_index]} ${normal}"
+    printf "${cyan}${arrow}${normal}${unchecked} ${list[$_current_index]} ${normal}"
   fi
 }
 
 remove_checkbox_instructions() {
-  if [ $first_keystroke = true ]; then
-    tput cuu $((${current_index}+1))
+  if [ $_first_keystroke = true ]; then
+    tput cuu $((${_current_index}+1))
     tput cub "$(tput cols)"
     tput cuf $((${#prompt}+3))
     tput el
-    tput cud $((${current_index}+1))
-    first_keystroke=false
+    tput cud $((${_current_index}+1))
+    _first_keystroke=false
   fi
 }
 
@@ -122,35 +122,35 @@ checkbox_input() {
   prompt=$1
   shift
   list=("${@}")
-  current_index=0
-  first_keystroke=true
+  _current_index=0
+  _first_keystroke=true
 
   trap control_c SIGINT EXIT
 
   stty -echo
   tput civis
 
-  echo "${normal}${green}?${normal} ${bold}${prompt}${normal} ${dim}(Press <space> to select, <enter> to finalize)${normal}"
+  print "${normal}${green}?${normal} ${bold}${prompt}${normal} ${dim}(Press <space> to select, <enter> to finalize)${normal}"
 
   for i in $(gen_index ${#list[@]}); do
     selected[$i]=false
   done
   for i in $(gen_index ${#list[@]}); do
     tput cub "$(tput cols)"
-    tput el
     if [ $i = 0 ]; then
       if [ "${selected[$i]}" = true ]; then
-        echo "${cyan}${arrow}${green}${checked}${normal} ${list[$i]} ${normal}"
+        print "${cyan}${arrow}${green}${checked}${normal} ${list[$i]} ${normal}"
       else
-        echo "${cyan}${arrow}${normal}${unchecked} ${list[$i]} ${normal}"
+        print "${cyan}${arrow}${normal}${unchecked} ${list[$i]} ${normal}"
       fi
     else
       if [ "${selected[$i]}" = true ]; then
-        echo " ${green}${checked}${normal} ${list[$i]} ${normal}"
+        print " ${green}${checked}${normal} ${list[$i]} ${normal}"
       else
-        echo " ${unchecked} ${list[$i]} ${normal}"
+        print " ${unchecked} ${list[$i]} ${normal}"
       fi
     fi
+    tput el
   done
 
   for j in $(gen_index ${#list[@]}); do

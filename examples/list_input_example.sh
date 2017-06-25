@@ -12,5 +12,5 @@ list_input "What would you like to eat today?" "${food[@]}"
 
 selected_food="${food[$selected_index]}"
 
-echo "Drink: $selected_drink"
-echo "Food: $selected_food"
+print "Drink: $selected_drink"
+print "Food: $selected_food"
