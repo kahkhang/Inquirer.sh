@@ -111,6 +111,7 @@ text_input() {
   trap control_c SIGINT EXIT
 
   stty -echo
+  tput cnorm
 
   on_keypress on_default on_default on_text_input_ascii on_text_input_enter on_text_input_left on_text_input_right on_text_input_ascii on_text_input_backspace
   eval $var_name=\'"${_text_input}"\'
