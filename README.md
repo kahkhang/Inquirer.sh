@@ -17,14 +17,19 @@ print "Selected: ${drinks[$selected_index]}"
 ### Checkbox Input
 ![Checkbox Input Example](screenshots/checkbox_input.png "Checkbox Input Example")
 
+**checkbox_input** *variable_name* *prompt* *options*
+
 ```sh
 source checkbox_input.sh
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
-checkbox_input "Which hawker centres do you prefer?" hawker_centres
-selected_hawkers=( "${selected_options[@]}" )
-print "Selected indices $(join "${selected_indices[@]}")"
-print "Hawker Centres: $(join "${selected_hawkers[@]}")"
+
+checkbox_input selected_indices "Which hawker centres do you prefer?" hawker_centres
+echo "Selected indices $(join "${selected_indices[@]}")"
+echo "Selected Hawker Centers:"
+for i in $(seq 1 ${#selected_hawkers[@]}); do
+  echo "${hawker_centres[${selected_hawkers[$i]}]}"
+done
 ```
 
 ### Text Input
