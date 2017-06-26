@@ -89,3 +89,16 @@ control_c() {
   stty echo
   exit $?
 }
+
+select_indices() {
+  local _select_list
+  local _select_indices
+  local _select_selected=()
+  eval _select_list=( '"${'${1}'[@]}"' )
+  eval _select_indices=( '"${'${2}'[@]}"' )
+  local _select_var_name=$3
+  eval $_select_var_name\=\(\)
+  for i in $(gen_index ${#_select_indices[@]}); do
+    eval $_select_var_name\+\=\(\""${_select_list[${_select_indices[$i]}]}"\"\)
+  done
+}

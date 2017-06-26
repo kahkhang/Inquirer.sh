@@ -12,7 +12,7 @@ on_text_input_left() {
 
 on_text_input_right() {
   remove_regex_failed
-  if [ $_current_pos -lt ${#input} ]; then
+  if [ $_current_pos -lt ${#_text_input} ]; then
     tput cuf1
     _current_pos=$(($_current_pos+1))
   fi
@@ -20,15 +20,15 @@ on_text_input_right() {
 
 on_text_input_enter() {
   remove_regex_failed
-  if [[ "$input" =~ $_text_input_regex ]]; then
+  if [[ "$_text_input" =~ $_text_input_regex ]]; then
     tput cub "$(tput cols)"
     tput cuf $((${#_read_prompt}-19))
-    printf "${cyan}${input}${normal}"
+    printf "${cyan}${_text_input}${normal}"
     tput el
     tput cud1
     tput cub "$(tput cols)"
     tput el
-    eval $var_name=\'"${input}"\'
+    eval $var_name=\'"${_text_input}"\'
     _break_keypress=true
   else
     _text_input_regex_failed=true
@@ -41,7 +41,7 @@ on_text_input_enter() {
     tput cub "$(tput cols)"
     tput cuf $((${#_read_prompt}-19))
     tput el
-    input=""
+    _text_input=""
     _current_pos=0
     tput cnorm
   fi
@@ -55,8 +55,8 @@ on_text_input_ascii() {
     c=' '
   fi
 
-  local rest="${input:$_current_pos}"
-  input="${input:0:$_current_pos}$c$rest"
+  local rest="${_text_input:$_current_pos}"
+  _text_input="${_text_input:0:$_current_pos}$c$rest"
   _current_pos=$(($_current_pos+1))
 
   tput civis
@@ -71,18 +71,15 @@ on_text_input_ascii() {
 on_text_input_backspace() {
   remove_regex_failed
   if [ $_current_pos -gt 0 ]; then
-    local start="${input:0:$(($_current_pos-1))}"
-    local rest="${input:$_current_pos}"
+    local start="${_text_input:0:$(($_current_pos-1))}"
+    local rest="${_text_input:$_current_pos}"
     _current_pos=$(($_current_pos-1))
     tput cub 1
-    tput civis
-    printf "$rest"
     tput el
-    input="$start$rest"
-    if [ ${#rest} -gt 0 ]; then
-      tput cub ${#rest}
-    fi
-    tput cnorm
+    tput sc
+    printf "$rest"
+    tput rc
+    _text_input="$start$rest"
   fi
 }
 
@@ -107,7 +104,7 @@ text_input() {
   _read_prompt="$( echo "$_read_prompt_start ${prompt} $_read_prompt_end")"
   _current_pos=0
   _text_input_regex_failed=false
-  input=""
+  _text_input=""
   printf "$_read_prompt"
 
 
@@ -116,10 +113,11 @@ text_input() {
   stty -echo
 
   on_keypress on_default on_default on_text_input_ascii on_text_input_enter on_text_input_left on_text_input_right on_text_input_ascii on_text_input_backspace
-  eval $var_name=\'"${input}"\'
+  eval $var_name=\'"${_text_input}"\'
   unset _text_input_regex
   unset _text_input_regex_failed_msg
   unset _read_prompt
   unset _current_pos
-  unset input
+  unset _text_input_regex_failed
+  unset _text_input
 }

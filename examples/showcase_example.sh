@@ -7,18 +7,13 @@ source text_input.sh
 text_input "What's your first name" name
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
-checkbox_input "Which hawker centres do you prefer?" hawker_centres
-selected_hawkers=( "${selected_options[@]}" )
+checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_hawkers
 
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
-list_input "What would you like to drink today?" drinks
-
-selected_drink="${drinks[$selected_index]}"
+list_input "What would you like to drink today?" drinks selected_drink
 
 food=( 'Chicken Rice' 'Lor Mee' 'Nasi Lemak' 'Bak Kut Teh' )
-list_input "What would you like to eat today?" food
-
-selected_food="${food[$selected_index]}"
+list_input "What would you like to eat today?" food selected_food
 
 print "              Your selections                   "
 print "------------------------------------------------"
