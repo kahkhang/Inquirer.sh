@@ -88,7 +88,7 @@ remove_regex_failed() {
     _text_input_regex_failed=false
     tput sc
     tput cud1
-    tput cub "$(tput cols)"
+    tput el1
     tput el
     tput rc
   fi

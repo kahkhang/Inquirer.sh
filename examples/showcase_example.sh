@@ -15,10 +15,10 @@ list_input "What would you like to drink today?" drinks selected_drink
 food=( 'Chicken Rice' 'Lor Mee' 'Nasi Lemak' 'Bak Kut Teh' )
 list_input "What would you like to eat today?" food selected_food
 
-print "              Your selections                   "
-print "------------------------------------------------"
-print "Name: $name"
-print "Drink: $selected_drink"
-print "Food: $selected_food"
-print "Hawker Centres: $(join "${selected_hawkers[@]}")"
-print "------------------------------------------------"
+echo "              Your selections                   "
+echo "------------------------------------------------"
+echo "Name: $name"
+echo "Drink: $selected_drink"
+echo "Food: $selected_food"
+echo "Hawker Centres: $(join "${selected_hawkers[@]}")"
+echo "------------------------------------------------"

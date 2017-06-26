@@ -48,9 +48,16 @@ on_list_input_enter_space() {
   local OLD_IFS
   OLD_IFS=$IFS
   IFS=$'\n'
-  tput cuu $((${_list_selected_index}+1))
+
+  tput cud $((${#_list_options[@]}-${_list_selected_index}))
   tput cub "$(tput cols)"
 
+  for i in $(seq $((${#_list_options[@]}+1))); do
+    tput el1
+    tput el
+    tput cuu1
+  done
+  tput cub "$(tput cols)"
 
   tput cuf $((${#prompt}+3))
   printf "${cyan}${_list_options[$_list_selected_index]}${normal}"

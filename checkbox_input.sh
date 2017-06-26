@@ -2,6 +2,11 @@
 set -e
 source common.sh
 
+print() {
+  echo "$1"
+  tput el
+}
+
 on_checkbox_input_up() {
   remove_checkbox_instructions
   tput cub "$(tput cols)"
@@ -68,8 +73,6 @@ on_checkbox_input_enter() {
   _checkbox_selected_indices=()
   _checkbox_selected_options=()
   IFS=$'\n'
-  tput cuu $((${_current_index}+1))
-  tput cub "$(tput cols)"
 
   for i in $(gen_index ${#_checkbox_list[@]}); do
     if [ "${_checkbox_selected[$i]}" = true ]; then
@@ -77,6 +80,16 @@ on_checkbox_input_enter() {
       _checkbox_selected_options+=("${_checkbox_list[$i]}")
     fi
   done
+
+  tput cud $((${#_checkbox_list[@]}-${_current_index}))
+  tput cub "$(tput cols)"
+
+  for i in $(seq $((${#_checkbox_list[@]}+1))); do
+    tput el1
+    tput el
+    tput cuu1
+  done
+  tput cub "$(tput cols)"
 
   tput cuf $((${#prompt}+3))
   printf "${cyan}$(join "${_checkbox_selected_options[@]}")${normal}"
