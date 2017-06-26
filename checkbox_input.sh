@@ -118,12 +118,11 @@ remove_checkbox_instructions() {
   fi
 }
 
-checkbox_input() {
+_checkbox_input() {
   local i
   local j
   prompt=$1
   eval _checkbox_list=( '"${'${2}'[@]}"' )
-  _checkbox_input_output_var_name=$3
   _current_index=0
   _first_keystroke=true
 
@@ -160,8 +159,30 @@ checkbox_input() {
   done
 
   on_keypress on_checkbox_input_up on_checkbox_input_down on_checkbox_input_space on_checkbox_input_enter
+}
 
+checkbox_input() {
+  _checkbox_input "$1" "$2"
+  _checkbox_input_output_var_name=$3
   select_indices _checkbox_list _checkbox_selected_indices $_checkbox_input_output_var_name
+  unset _checkbox_list
+  unset _break_keypress
+  unset _first_keystroke
+  unset _current_index
+  unset _checkbox_input_output_var_name
+  unset _checkbox_selected_indices
+  unset _checkbox_selected_options
+}
+
+checkbox_input_indices() {
+  _checkbox_input "$1" "$2"
+  _checkbox_input_output_var_name=$3
+
+  eval $_checkbox_input_output_var_name\=\(\)
+  for i in $(gen_index ${#_checkbox_selected_indices[@]}); do
+    eval $_checkbox_input_output_var_name\+\=\(${_checkbox_selected_indices[$i]}\)
+  done
+
   unset _checkbox_list
   unset _break_keypress
   unset _first_keystroke

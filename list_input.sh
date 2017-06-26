@@ -75,12 +75,12 @@ remove_list_instructions() {
   fi
 }
 
-list_input() {
+_list_input() {
   local i
   local j
   prompt=$1
   eval _list_options=( '"${'${2}'[@]}"' )
-  local var_name=$3
+
   _list_selected_index=0
   _first_keystroke=true
 
@@ -106,7 +106,24 @@ list_input() {
   done
 
   on_keypress on_list_input_up on_list_input_down on_list_input_enter_space on_list_input_enter_space
+
+}
+
+
+list_input() {
+  _list_input "$1" "$2"
+  local var_name=$3
   eval $var_name=\'"${_list_options[$_list_selected_index]}"\'
+  unset _list_selected_index
+  unset _list_options
+  unset _break_keypress
+  unset _first_keystroke
+}
+
+list_input_index() {
+  _list_input "$1" "$2"
+  local var_name=$3
+  eval $var_name=\'"$_list_selected_index"\'
   unset _list_selected_index
   unset _list_options
   unset _break_keypress

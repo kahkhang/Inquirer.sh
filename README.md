@@ -9,9 +9,12 @@ A collection of common interactive command line user interfaces, written in bash
 source list_input.sh
 
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
-list_input "What would you like to drink today?" drinks selected_drink
-
+list_input "What would you like to drink today (1st Drink)?" drinks selected_drink
 print "Selected: $selected_drink"
+
+drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
+list_input_index "What would you like to drink today (2nd Drink)?" drinks selected_drink_index
+print "Selected Index: $selected_drink_index"
 ```
 
 ### Checkbox Input
@@ -23,6 +26,10 @@ source checkbox_input.sh
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_hawkers
 print "Hawker Centres: $(join "${selected_hawkers[@]}")"
+
+hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
+checkbox_input_indices "Which hawker centres do you prefer?" hawker_centres selected_hawkers_indices
+print "Hawker Centre Indices: $(join "${selected_hawkers_indices[@]}")"
 ```
 
 ### Text Input
