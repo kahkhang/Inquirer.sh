@@ -2,11 +2,6 @@
 set -e
 source common.sh
 
-print() {
-  echo "$1"
-  tput el
-}
-
 on_checkbox_input_up() {
   remove_checkbox_instructions
   tput cub "$(tput cols)"
