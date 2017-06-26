@@ -15,11 +15,6 @@ bold="$(tput bold)"
 normal="$(tput sgr0)"
 dim=$'\e[2m'
 
-print() {
-  echo "$1"
-  tput el
-}
-
 join() {
   echo -n "$1";
   shift;
