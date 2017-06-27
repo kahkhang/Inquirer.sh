@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source inquisitor_common.sh
+source inquirer_common.sh
 
 on_text_input_left() {
   remove_regex_failed

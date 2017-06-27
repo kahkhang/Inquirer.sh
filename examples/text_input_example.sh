@@ -2,8 +2,7 @@
 set -e
 source text_input.sh
 
-# text_input "What's your first name" name
-# echo "Hello $name"
+text_input "What's your first name" name
 
 validate_disk_sizes() {
   local sizes=($(echo $1 | sed "s/,/ /g"))
@@ -19,7 +18,7 @@ validate_disk_sizes() {
   fi
 }
 
-text_input "Key in your local storage size (comma separated in mb, total not exceeding 100):" \
+text_input "Key in your local storage size (comma separated in mb, total not exceeding 100mb):" \
            disk_sizes "^[0-9]+(,[0-9]+)*$" "Enter valid disk sizes" validate_disk_sizes
 
 disk_sizes=($(echo $disk_sizes | sed "s/,/ /g"))
@@ -30,4 +29,5 @@ for disk_size in ${disk_sizes[@]}; do
   echo "Disk size: ${disk_size}mb"
 done
 
+echo "Hello $name"
 echo "$(join disk_sizes ",")"

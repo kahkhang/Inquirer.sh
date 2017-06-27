@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source inquisitor_common.sh
+source inquirer_common.sh
 
 on_list_input_up() {
   remove_list_instructions

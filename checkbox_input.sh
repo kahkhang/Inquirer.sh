@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source inquisitor_common.sh
+source inquirer_common.sh
 
 on_checkbox_input_up() {
   remove_checkbox_instructions
