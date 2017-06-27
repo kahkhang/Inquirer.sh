@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source common.sh
+source inquisitor_common.sh
 
 on_text_input_left() {
   remove_regex_failed
@@ -20,7 +20,8 @@ on_text_input_right() {
 
 on_text_input_enter() {
   remove_regex_failed
-  if [[ "$_text_input" =~ $_text_input_regex ]]; then
+
+  if [[ "$_text_input" =~ $_text_input_regex && "$(eval $_text_input_validator "$_text_input")" = true ]]; then
     tput cub "$(tput cols)"
     tput cuf $((${#_read_prompt}-19))
     printf "${cyan}${_text_input}${normal}"
@@ -94,11 +95,16 @@ remove_regex_failed() {
   fi
 }
 
+text_input_default_validator() {
+  echo true;
+}
+
 text_input() {
   prompt=$1
   local var_name=$2
   _text_input_regex="${3:-"\.+"}"
   _text_input_regex_failed_msg=${4:-"Input validation failed"}
+  _text_input_validator=${5:-text_input_default_validator}
   local _read_prompt_start=$'\e[32m?\e[39m\e[1m'
   local _read_prompt_end=$'\e[22m'
   _read_prompt="$( echo "$_read_prompt_start ${prompt} $_read_prompt_end")"

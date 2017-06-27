@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source common.sh
+source inquisitor_common.sh
 
 on_checkbox_input_up() {
   remove_checkbox_instructions
@@ -87,7 +87,7 @@ on_checkbox_input_enter() {
   tput cub "$(tput cols)"
 
   tput cuf $((${#prompt}+3))
-  printf "${cyan}$(join "${_checkbox_selected_options[@]}")${normal}"
+  printf "${cyan}$(join _checkbox_selected_options)${normal}"
   tput el
 
   tput cud1

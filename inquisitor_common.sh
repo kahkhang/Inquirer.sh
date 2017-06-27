@@ -21,11 +21,17 @@ print() {
 }
 
 join() {
-  echo -n "$1";
-  shift;
-  while(($#)) ; do
-    printf ", %s" "$1"
-    shift
+  local IFS=$'\n'
+  local _join_list
+  eval _join_list=( '"${'${1}'[@]}"' )
+  local first=true
+  for item in ${_join_list[@]}; do
+    if [ "$first" = true ]; then
+      printf "%s" "$item"
+      first=false
+    else
+      printf "${2-, }%s" "$item"
+    fi
   done
 }
 
