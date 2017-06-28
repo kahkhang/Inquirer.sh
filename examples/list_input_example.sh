@@ -10,7 +10,7 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 PARENT_DIR=$(dirname "$DIR")
-source $PARENT_DIR/list_input.sh
+source $PARENT_DIR/dev/list_input.sh
 
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
 list_input "What would you like to drink today (1st Drink)?" drinks selected_drink
