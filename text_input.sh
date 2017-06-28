@@ -109,17 +109,17 @@ text_input_default_validator() {
 }
 
 text_input() {
-  prompt=$1
+  local prompt=$1
   local var_name=$2
-  _text_input_regex="${3:-"\.+"}"
-  _text_input_regex_failed_msg=${4:-"Input validation failed"}
-  _text_input_validator=${5:-text_input_default_validator}
+  local _text_input_regex="${3:-"\.+"}"
+  local _text_input_regex_failed_msg=${4:-"Input validation failed"}
+  local _text_input_validator=${5:-text_input_default_validator}
   local _read_prompt_start=$'\e[32m?\e[39m\e[1m'
   local _read_prompt_end=$'\e[22m'
-  _read_prompt="$( echo "$_read_prompt_start ${prompt} $_read_prompt_end")"
-  _current_pos=0
-  _text_input_regex_failed=false
-  _text_input=""
+  local _read_prompt="$( echo "$_read_prompt_start ${prompt} $_read_prompt_end")"
+  local _current_pos=0
+  local _text_input_regex_failed=false
+  local _text_input=""
   printf "$_read_prompt"
 
 
@@ -130,10 +130,4 @@ text_input() {
 
   on_keypress on_default on_default on_text_input_ascii on_text_input_enter on_text_input_left on_text_input_right on_text_input_ascii on_text_input_backspace
   eval $var_name=\'"${_text_input}"\'
-  unset _text_input_regex
-  unset _text_input_regex_failed_msg
-  unset _read_prompt
-  unset _current_pos
-  unset _text_input_regex_failed
-  unset _text_input
 }
