@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+### IMPORT_COMMON ###
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
@@ -10,6 +11,7 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 source $DIR/inquirer_common.sh
+### IMPORT_END ###
 
 on_text_input_left() {
   remove_regex_failed

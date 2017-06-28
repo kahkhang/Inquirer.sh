@@ -10,9 +10,7 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 PARENT_DIR=$(dirname "$DIR")
-source $PARENT_DIR/list_input.sh
-source $PARENT_DIR/checkbox_input.sh
-source $PARENT_DIR/text_input.sh
+source $PARENT_DIR/dist/inquirer.sh
 
 text_input "What's your first name" name
 

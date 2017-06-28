@@ -10,7 +10,7 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 PARENT_DIR=$(dirname "$DIR")
-source $PARENT_DIR/checkbox_input.sh
+source $PARENT_DIR/dist/checkbox_input.sh
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_hawkers
