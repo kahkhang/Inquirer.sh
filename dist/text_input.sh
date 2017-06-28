@@ -1,7 +1,5 @@
 #!/bin/bash
-set -e
 
-#!/bin/bash
 arrow="$(echo -e '\xe2\x9d\xaf')"
 checked="$(echo -e '\xe2\x97\x89')"
 unchecked="$(echo -e '\xe2\x97\xaf')"
@@ -111,6 +109,10 @@ select_indices() {
     eval $_select_var_name\+\=\(\""${_select_list[${_select_indices[$i]}]}"\"\)
   done
 }
+
+
+set -e
+
 
 
 on_text_input_left() {

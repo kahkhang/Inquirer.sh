@@ -1,4 +1,5 @@
 #!/bin/bash
+
 arrow="$(echo -e '\xe2\x9d\xaf')"
 checked="$(echo -e '\xe2\x97\x89')"
 unchecked="$(echo -e '\xe2\x97\xaf')"
@@ -108,7 +109,7 @@ select_indices() {
     eval $_select_var_name\+\=\(\""${_select_list[${_select_indices[$i]}]}"\"\)
   done
 }
-#!/bin/bash
+
 set -e
 
 
@@ -310,7 +311,7 @@ checkbox_input_indices() {
   unset _checkbox_selected_indices
   unset _checkbox_selected_options
 }
-#!/bin/bash
+
 set -e
 
 
@@ -449,7 +450,7 @@ list_input_index() {
   unset _break_keypress
   unset _first_keystroke
 }
-#!/bin/bash
+
 set -e
 
 
