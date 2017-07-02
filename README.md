@@ -3,46 +3,27 @@
 
 A collection of common interactive command line user interfaces, written in bash. Inspired by [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
 
-### List Input
+### List Input ([Example](https://github.com/tanhauhau/Inquirer.sh/blob/master/examples/list_input_example.sh))
 ![List Input Example](demos/list_input.gif "List Input Example")
 
 ```sh
-source dist/list_input.sh
-
-drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
-list_input "What would you like to drink today (1st Drink)?" drinks selected_drink
-
-food=( 'Chicken Rice' 'Lor Mee' 'Nasi Lemak' 'Bak Kut Teh' )
-list_input "What would you like to eat today?" food selected_food
-
-echo "Drink: $selected_drink"
-echo "Food: $selected_food"
+list_input [prompt] [array] [selected_option]
+list_input_index [prompt] [array] [selected_index]
 ```
 
-### Checkbox Input
+### Checkbox Input ([Example](https://github.com/tanhauhau/Inquirer.sh/blob/master/examples/checkbox_input_example.sh))
 ![Checkbox Input Example](demos/checkbox_input.gif "Checkbox Input Example")
 
 ```sh
-source dist/checkbox_input.sh
-
-hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
-checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_hawkers
-
-drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
-checkbox_input "Which drinks do you prefer?" drinks selected_drinks
-echo "Preferred Hawker Centres: $(join selected_hawkers)"
-echo "Preferred Drinks: $(join drinks)"
-
+checkbox_input [prompt] [array] [selected_options_output]
+checkbox_input_indices [prompt] [array] [selected_indices_output]
 ```
 
-### Text Input
+### Text Input ([Example](https://github.com/tanhauhau/Inquirer.sh/blob/master/examples/text_input_example.sh))
 ![Text Input Example](demos/text_input.gif "Text Input Example")
 
 ```sh
-source dist/text_input.sh
-
-text_input "What's your first name" name
-echo "Hello $name"
+text_input [prompt] [output_variable] [regex_string (Optional)] [failed_validation_prompt (Optional)] [validator_function (Optional)]
 ```
 
 ### [Contributors](https://github.com/tanhauhau/Inquirer.sh/blob/master/CONTRIBUTORS.md)
