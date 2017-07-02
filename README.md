@@ -4,37 +4,39 @@
 A collection of common interactive command line user interfaces, written in bash. Inspired by [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
 
 ### List Input
-![List Input Example](screenshots/list_input.png "List Input Example")
+![List Input Example](demos/list_input.gif "List Input Example")
 
 ```sh
 source dist/list_input.sh
 
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
 list_input "What would you like to drink today (1st Drink)?" drinks selected_drink
-echo "Selected: $selected_drink"
 
-drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
-list_input_index "What would you like to drink today (2nd Drink)?" drinks selected_drink_index
-echo "Selected Index: $selected_drink_index"
+food=( 'Chicken Rice' 'Lor Mee' 'Nasi Lemak' 'Bak Kut Teh' )
+list_input "What would you like to eat today?" food selected_food
+
+echo "Drink: $selected_drink"
+echo "Food: $selected_food"
 ```
 
 ### Checkbox Input
-![Checkbox Input Example](screenshots/checkbox_input.png "Checkbox Input Example")
+![Checkbox Input Example](demos/checkbox_input.gif "Checkbox Input Example")
 
 ```sh
 source dist/checkbox_input.sh
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_hawkers
-echo "Hawker Centres: $(join selected_hawkers)"
 
-hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
-checkbox_input_indices "Which hawker centres do you prefer?" hawker_centres selected_hawkers_indices
-echo "Hawker Centre Indices: $(join selected_hawkers_indices)"
+drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
+checkbox_input "Which drinks do you prefer?" drinks selected_drinks
+echo "Preferred Hawker Centres: $(join selected_hawkers)"
+echo "Preferred Drinks: $(join drinks)"
+
 ```
 
 ### Text Input
-![Text Input Example](screenshots/text_input.png "Text Input Example")
+![Text Input Example](demos/text_input.gif "Text Input Example")
 
 ```sh
 source dist/text_input.sh
