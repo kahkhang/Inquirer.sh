@@ -1,7 +1,7 @@
 ## :rocket: Inquirer.sh - Modern Bash Terminal Prompt
 [![Bash](https://img.shields.io/badge/language-Bash-green.svg)](https://github.com/tanhauhau/Inquirer.sh) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/tanhauhau/Inquirer.sh/master/LICENSE) [![Twitter](https://img.shields.io/twitter/url/https/github.com/tanhauhau/Inquirer.sh.svg?style=social)](https://twitter.com/intent/tweet?text=%23Inquirer.sh%20rocks%21&url=%5Bobject%20Object%5D)
 
-A collection of common interactive command line user interfaces, written in bash. Inspired by [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)
+Inquirer.sh is a dependency-free collection of bash interative terminal prompts based on [Inquirer.js](https://github.com/SBoudrias/Inquirer.js)'s interfaces
 
 ### List Input ([Example](https://github.com/tanhauhau/Inquirer.sh/blob/master/examples/list_input_example.sh))
 ![List Input Example](demos/list_input.gif "List Input Example")
