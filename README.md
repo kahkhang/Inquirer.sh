@@ -7,23 +7,23 @@ A collection of common interactive command line user interfaces, written in bash
 ![List Input Example](demos/list_input.gif "List Input Example")
 
 ```sh
-list_input [prompt] [array] [selected_option]
-list_input_index [prompt] [array] [selected_index]
+Usage: list_input [prompt] [array] [selected_option]
+Usage: list_input_index [prompt] [array] [selected_index]
 ```
 
 ### Checkbox Input ([Example](https://github.com/tanhauhau/Inquirer.sh/blob/master/examples/checkbox_input_example.sh))
 ![Checkbox Input Example](demos/checkbox_input.gif "Checkbox Input Example")
 
 ```sh
-checkbox_input [prompt] [array] [selected_options_output]
-checkbox_input_indices [prompt] [array] [selected_indices_output]
+Usage: checkbox_input [prompt] [array] [selected_options_output]
+Usage: checkbox_input_indices [prompt] [array] [selected_indices_output]
 ```
 
 ### Text Input ([Example](https://github.com/tanhauhau/Inquirer.sh/blob/master/examples/text_input_example.sh))
 ![Text Input Example](demos/text_input.gif "Text Input Example")
 
 ```sh
-text_input [prompt] [output_variable] [regex_string (Optional)] [failed_validation_prompt (Optional)] [validator_function (Optional)]
+Usage: text_input [prompt] [output_variable] [regex_string (Optional)] [failed_validation_prompt (Optional)] [validator_function (Optional)]
 ```
 
 ### [Contributors](https://github.com/tanhauhau/Inquirer.sh/blob/master/CONTRIBUTORS.md)
