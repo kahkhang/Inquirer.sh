@@ -27,3 +27,5 @@ Usage: text_input [prompt] [output_variable] [regex_string (Optional)] [failed_v
 ```
 
 ### [Contributors](https://github.com/tanhauhau/Inquirer.sh/blob/master/CONTRIBUTORS.md)
+* [Andrew Low](https://github.com/kahkhang)
+* [Tan Li Hau](https://github.com/tanhauhau)
