@@ -7,7 +7,7 @@ A collection of common interactive command line user interfaces, written in bash
 ![List Input Example](screenshots/list_input.png "List Input Example")
 
 ```sh
-source list_input.sh
+source dist/list_input.sh
 
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
 list_input "What would you like to drink today (1st Drink)?" drinks selected_drink
@@ -22,7 +22,7 @@ echo "Selected Index: $selected_drink_index"
 ![Checkbox Input Example](screenshots/checkbox_input.png "Checkbox Input Example")
 
 ```sh
-source checkbox_input.sh
+source dist/checkbox_input.sh
 
 hawker_centres=( 'Old Airport Road Hawker Centre' 'Golden Mile Food Complex' 'Maxwell Food Centre' 'Newton Food Centre' )
 checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_hawkers
@@ -37,7 +37,7 @@ echo "Hawker Centre Indices: $(join selected_hawkers_indices)"
 ![Text Input Example](screenshots/text_input.png "Text Input Example")
 
 ```sh
-source text_input.sh
+source dist/text_input.sh
 
 text_input "What's your first name" name
 echo "Hello $name"
