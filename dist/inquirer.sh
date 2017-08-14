@@ -247,10 +247,6 @@ on_checkbox_input_ascii() {
   esac
 }
 
-_null() {
-  :
-}
-
 _checkbox_input() {
   local i
   local j
@@ -291,7 +287,7 @@ _checkbox_input() {
     tput cuu1
   done
 
-  on_keypress on_checkbox_input_up on_checkbox_input_down on_checkbox_input_space on_checkbox_input_enter _null _null on_checkbox_input_ascii
+  on_keypress on_checkbox_input_up on_checkbox_input_down on_checkbox_input_space on_checkbox_input_enter on_default on_default on_checkbox_input_ascii
 }
 
 checkbox_input() {
