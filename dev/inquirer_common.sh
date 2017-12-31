@@ -35,6 +35,27 @@ join() {
   done
 }
 
+function gen_env_from_options() {
+  local IFS=$'\n'
+  local _indices
+  local _env_names
+  local _checkbox_selected
+  eval _indices=( '"${'${1}'[@]}"' )
+  eval _env_names=( '"${'${2}'[@]}"' )
+
+  for i in $(gen_index ${#_env_names[@]}); do
+    _checkbox_selected[$i]=false
+  done
+
+  for i in ${_indices[@]}; do
+    _checkbox_selected[$i]=true
+  done
+
+  for i in $(gen_index ${#_env_names[@]}); do
+    printf "%s=%s\n" "${_env_names[$i]}" "${_checkbox_selected[$i]}"
+  done
+}
+
 on_default() {
   true;
 }
