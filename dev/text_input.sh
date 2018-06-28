@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 ### IMPORT_COMMON ###
 SOURCE="${BASH_SOURCE[0]}"
@@ -132,4 +131,6 @@ text_input() {
 
   on_keypress on_default on_default on_text_input_ascii on_text_input_enter on_text_input_left on_text_input_right on_text_input_ascii on_text_input_backspace
   eval $var_name=\'"${_text_input}"\'
+
+  cleanup
 }

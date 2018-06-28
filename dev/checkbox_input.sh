@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 ### IMPORT_COMMON ###
 SOURCE="${BASH_SOURCE[0]}"
@@ -201,6 +200,7 @@ checkbox_input() {
   _checkbox_input "$1" "$2"
   _checkbox_input_output_var_name=$3
   select_indices _checkbox_list _checkbox_selected_indices $_checkbox_input_output_var_name
+
   unset _checkbox_list
   unset _break_keypress
   unset _first_keystroke
@@ -208,6 +208,8 @@ checkbox_input() {
   unset _checkbox_input_output_var_name
   unset _checkbox_selected_indices
   unset _checkbox_selected_options
+
+  cleanup
 }
 
 checkbox_input_indices() {
@@ -226,4 +228,6 @@ checkbox_input_indices() {
   unset _checkbox_input_output_var_name
   unset _checkbox_selected_indices
   unset _checkbox_selected_options
+
+  cleanup
 }

@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 ### IMPORT_COMMON ###
 SOURCE="${BASH_SOURCE[0]}"
@@ -136,6 +135,8 @@ list_input() {
   unset _list_options
   unset _break_keypress
   unset _first_keystroke
+
+  cleanup
 }
 
 list_input_index() {
@@ -146,4 +147,6 @@ list_input_index() {
   unset _list_options
   unset _break_keypress
   unset _first_keystroke
+
+  cleanup
 }

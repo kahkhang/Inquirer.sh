@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# store the current set options
+OLD_SET=$-
+set -e
+
 arrow="$(echo -e '\xe2\x9d\xaf')"
 checked="$(echo -e '\xe2\x97\x89')"
 unchecked="$(echo -e '\xe2\x97\xaf')"
@@ -112,9 +117,22 @@ gen_index() {
   fi
 }
 
-control_c() {
+cleanup() {
+  # Reset character attributes, make cursor visible, and restore
+  # previous screen contents (if possible).
+  tput sgr0
   tput cnorm
   stty echo
+
+  # Restore `set e` option to its orignal value
+  if [[ $OLD_SET =~ e ]]
+  then set -e
+  else set +e
+  fi
+}
+
+control_c() {
+  cleanup
   exit $?
 }
 
@@ -132,7 +150,6 @@ select_indices() {
 }
 
 
-set -e
 
 
 
@@ -259,6 +276,8 @@ list_input() {
   unset _list_options
   unset _break_keypress
   unset _first_keystroke
+
+  cleanup
 }
 
 list_input_index() {
@@ -269,4 +288,6 @@ list_input_index() {
   unset _list_options
   unset _break_keypress
   unset _first_keystroke
+
+  cleanup
 }

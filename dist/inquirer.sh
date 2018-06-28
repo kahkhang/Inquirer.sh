@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# store the current set options
+OLD_SET=$-
+set -e
+
 arrow="$(echo -e '\xe2\x9d\xaf')"
 checked="$(echo -e '\xe2\x97\x89')"
 unchecked="$(echo -e '\xe2\x97\xaf')"
@@ -112,9 +117,22 @@ gen_index() {
   fi
 }
 
-control_c() {
+cleanup() {
+  # Reset character attributes, make cursor visible, and restore
+  # previous screen contents (if possible).
+  tput sgr0
   tput cnorm
   stty echo
+
+  # Restore `set e` option to its orignal value
+  if [[ $OLD_SET =~ e ]]
+  then set -e
+  else set +e
+  fi
+}
+
+control_c() {
+  cleanup
   exit $?
 }
 
@@ -131,7 +149,6 @@ select_indices() {
   done
 }
 
-set -e
 
 
 
@@ -323,6 +340,7 @@ checkbox_input() {
   _checkbox_input "$1" "$2"
   _checkbox_input_output_var_name=$3
   select_indices _checkbox_list _checkbox_selected_indices $_checkbox_input_output_var_name
+
   unset _checkbox_list
   unset _break_keypress
   unset _first_keystroke
@@ -330,6 +348,8 @@ checkbox_input() {
   unset _checkbox_input_output_var_name
   unset _checkbox_selected_indices
   unset _checkbox_selected_options
+
+  cleanup
 }
 
 checkbox_input_indices() {
@@ -348,9 +368,10 @@ checkbox_input_indices() {
   unset _checkbox_input_output_var_name
   unset _checkbox_selected_indices
   unset _checkbox_selected_options
+
+  cleanup
 }
 
-set -e
 
 
 
@@ -477,6 +498,8 @@ list_input() {
   unset _list_options
   unset _break_keypress
   unset _first_keystroke
+
+  cleanup
 }
 
 list_input_index() {
@@ -487,9 +510,10 @@ list_input_index() {
   unset _list_options
   unset _break_keypress
   unset _first_keystroke
+
+  cleanup
 }
 
-set -e
 
 
 
@@ -612,4 +636,6 @@ text_input() {
 
   on_keypress on_default on_default on_text_input_ascii on_text_input_enter on_text_input_left on_text_input_right on_text_input_ascii on_text_input_backspace
   eval $var_name=\'"${_text_input}"\'
+
+  cleanup
 }
