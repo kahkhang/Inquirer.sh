@@ -121,7 +121,6 @@ cleanup() {
   # previous screen contents (if possible).
   tput sgr0
   tput cnorm
-  tput rmcup || clear
   stty echo
 
   # Restore `set e` option to its orignal value
