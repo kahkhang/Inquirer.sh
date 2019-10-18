@@ -153,7 +153,7 @@ select_indices() {
 
 
 on_checkbox_input_up() {
-  remove_checkbox_instructions
+  #remove_checkbox_instructions
   tput cub "$(tput cols)"
 
   if [ "${_checkbox_selected[$_current_index]}" = true ]; then
@@ -183,7 +183,7 @@ on_checkbox_input_up() {
 }
 
 on_checkbox_input_down() {
-  remove_checkbox_instructions
+  #remove_checkbox_instructions
   tput cub "$(tput cols)"
 
   if [ "${_checkbox_selected[$_current_index]}" = true ]; then
@@ -249,7 +249,7 @@ on_checkbox_input_enter() {
 }
 
 on_checkbox_input_space() {
-  remove_checkbox_instructions
+  #remove_checkbox_instructions
   tput cub "$(tput cols)"
   tput el
   if [ "${_checkbox_selected[$_current_index]}" = true ]; then
