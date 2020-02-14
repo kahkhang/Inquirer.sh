@@ -13,4 +13,6 @@ PARENT_DIR=$(dirname "$DIR")
 source $PARENT_DIR/dist/text_input.sh
 
 text_input "What's your first name" name
-echo "Hello $name"
+text_input "Gender" gender "Male"
+
+echo "Hello $name ($gender)"

@@ -19,6 +19,7 @@ cyan="$(tput setaf 6)"
 white="$(tput setaf 7)"
 bold="$(tput bold)"
 normal="$(tput sgr0)"
+gray="\033[1;30m"
 dim=$'\e[2m'
 
 print() {
@@ -172,9 +173,13 @@ on_text_input_right() {
 on_text_input_enter() {
   remove_regex_failed
 
-  if [[ "$_text_input" =~ $_text_input_regex && "$(eval $_text_input_validator "$_text_input")" = true ]]; then
+  # Set default value if it has one
+  _text_input=$([ -z "$_text_input" ] && echo $_text_default_value || echo $_text_input)
+
+  # Only use validator to check, because you can use regexp in your validator
+  if [[ "$(eval $_text_input_validator "$_text_input")" = true ]]; then
     tput cub "$(tput cols)"
-    tput cuf $((${#_read_prompt}-19))
+    tput cuf $((${#_read_prompt}-${#_text_default_tip} - 36))
     printf "${cyan}${_text_input}${normal}"
     tput el
     tput cud1
@@ -253,12 +258,14 @@ text_input_default_validator() {
 text_input() {
   local prompt=$1
   local var_name=$2
-  local _text_input_regex="${3:-"\.+"}"
+  local _text_default_value=$3
+  # If there are default value, then show as a gray tip
+  local _text_default_tip=$([ -z "$_text_default_value" ] && echo "" || echo "(${_text_default_value})")
   local _text_input_regex_failed_msg=${4:-"Input validation failed"}
   local _text_input_validator=${5:-text_input_default_validator}
   local _read_prompt_start=$'\e[32m?\e[39m\e[1m'
   local _read_prompt_end=$'\e[22m'
-  local _read_prompt="$( echo "$_read_prompt_start ${prompt} $_read_prompt_end")"
+  local _read_prompt="$( echo "$_read_prompt_start ${prompt} ${gray}${_text_default_tip}${normal} $_read_prompt_end")"
   local _current_pos=0
   local _text_input_regex_failed=false
   local _text_input=""
