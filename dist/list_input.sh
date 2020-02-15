@@ -151,7 +151,15 @@ select_indices() {
 
 
 
-
+# Support VIM hjkl move
+on_list_input_ascii() {
+  key=$1
+  if [[ $key == 'k' || $key == 'K' || $key == 'h' || $key == 'H' ]]; then
+    on_list_input_up
+  elif [[ $key == 'j' || $key == 'J' || $key == 'l' || $key == 'L' ]]; then
+    on_list_input_down
+  fi
+}
 
 on_list_input_up() {
   remove_list_instructions
@@ -263,7 +271,7 @@ _list_input() {
     tput cuu1
   done
 
-  on_keypress on_list_input_up on_list_input_down on_list_input_enter_space on_list_input_enter_space
+  on_keypress on_list_input_up on_list_input_down on_list_input_enter_space on_list_input_enter_space on_list_input_up on_list_input_down on_list_input_ascii on_list_input_up
 
 }
 
