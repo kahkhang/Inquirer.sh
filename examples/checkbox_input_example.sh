@@ -18,4 +18,4 @@ checkbox_input "Which hawker centres do you prefer?" hawker_centres selected_haw
 drinks=( 'Teh' 'Teh Ping Gao Siu Dai' 'Kopi O' 'Yuan Yang' )
 checkbox_input "Which drinks do you prefer?" drinks selected_drinks
 echo "Preferred Hawker Centres: $(join selected_hawkers)"
-echo "Preferred Drinks: $(join drinks)"
+echo "Preferred Drinks: $(join selected_drinks)"
