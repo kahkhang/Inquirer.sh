@@ -23,7 +23,7 @@ Usage: checkbox_input_indices [prompt] [array] [selected_indices_output]
 ![Text Input Example](demos/text_input.gif "Text Input Example")
 
 ```sh
-Usage: text_input [prompt] [output_variable] [regex_string (Optional)] [failed_validation_prompt (Optional)] [validator_function (Optional)]
+Usage: text_input [prompt] [output_variable] [default_value (Optional)] [failed_validation_prompt (Optional)] [validator_function (Optional)]
 ```
 
 ### [Contributors](https://github.com/tanhauhau/Inquirer.sh/blob/master/CONTRIBUTORS.md)
