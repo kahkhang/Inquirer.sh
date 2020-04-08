@@ -14,44 +14,50 @@ source $DIR/inquirer_common.sh
 
 on_list_input_up() {
   remove_list_instructions
-  tput cub "$(tput cols)"
 
-  printf "  ${_list_options[$_list_selected_index]}"
-  tput el
-
-  if [ $_list_selected_index = 0 ]; then
-    _list_selected_index=$((${#_list_options[@]}-1))
-    tput cud $((${#_list_options[@]}-1))
+  if [ ${#_list_options[@]} -gt 1 ]; then
     tput cub "$(tput cols)"
-  else
-    _list_selected_index=$((_list_selected_index-1))
 
-    tput cuu1
-    tput cub "$(tput cols)"
+    printf "  ${_list_options[$_list_selected_index]}"
     tput el
-  fi
 
-  printf "${cyan}${arrow} %s ${normal}" "${_list_options[$_list_selected_index]}"
+    if [ $_list_selected_index = 0 ]; then
+      _list_selected_index=$((${#_list_options[@]}-1))
+      tput cud $((${#_list_options[@]}-1))
+      tput cub "$(tput cols)"
+    else
+      _list_selected_index=$((_list_selected_index-1))
+
+      tput cuu1
+      tput cub "$(tput cols)"
+      tput el
+    fi
+
+    printf "${cyan}${arrow} %s ${normal}" "${_list_options[$_list_selected_index]}"
+  fi
 }
 
 on_list_input_down() {
   remove_list_instructions
-  tput cub "$(tput cols)"
 
-  printf "  ${_list_options[$_list_selected_index]}"
-  tput el
+  if [ ${#_list_options[@]} -gt 1 ]; then
+    tput cub "$(tput cols)"
 
-  if [ $_list_selected_index = $((${#_list_options[@]}-1)) ]; then
-    _list_selected_index=0
-    tput cuu $((${#_list_options[@]}-1))
-    tput cub "$(tput cols)"
-  else
-    _list_selected_index=$((_list_selected_index+1))
-    tput cud1
-    tput cub "$(tput cols)"
+    printf "  ${_list_options[$_list_selected_index]}"
     tput el
+
+    if [ $_list_selected_index = $((${#_list_options[@]}-1)) ]; then
+      _list_selected_index=0
+      tput cuu $((${#_list_options[@]}-1))
+      tput cub "$(tput cols)"
+    else
+      _list_selected_index=$((_list_selected_index+1))
+      tput cud1
+      tput cub "$(tput cols)"
+      tput el
+    fi
+    printf "${cyan}${arrow} %s ${normal}" "${_list_options[$_list_selected_index]}"
   fi
-  printf "${cyan}${arrow} %s ${normal}" "${_list_options[$_list_selected_index]}"
 }
 
 on_list_input_enter_space() {
